@@ -1,0 +1,55 @@
+﻿// Just like C.
+// We are C-inspired, after all.
+
+makeBreakfast(bacon, eggs, toast);
+makeBreakfast();
+
+// Define them with fun, because functions are fun!
+fun printSum(a, b) {
+  print a + b;
+}
+
+fun returnSum(a, b) {
+  return a + b;
+}
+
+// Without a return, functions implicitly return nil.
+fun returnSum(a, b) {
+  a + b;
+}
+
+// Functions are first-class in Lox.
+fun addPair(a, b) {
+  return a + b;
+}
+
+fun identity(a) {
+  return a;
+}
+
+print identity(addPair)(1, 2); // Prints "3".
+
+// We can do all sorts of weird shenanigans this way:
+fun outerFunction() {
+  fun localFunction() {
+    print "I'm local!";
+  }
+
+  localFunction();
+}
+
+// What about this one?
+fun returnFunction() {
+  var outside = "outside";
+
+  fun inner() {
+    print outside;
+  }
+
+  return inner;
+}
+
+var fn = returnFunction();
+fn();
+
+// We need closure for this.

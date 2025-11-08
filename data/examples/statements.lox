@@ -1,0 +1,16 @@
+﻿// The key idea is that statements produce effects, and expressions produce values.
+
+// This is a statement, using a built-in keyword.
+print "Hello, world!";
+
+// This is a statement, kind of. Because it doesn't bind the value to anything,
+// it is promoted to an expression-statement.
+"some expression";
+
+// More generally, an expression followed by a semicolon is an expression-statement.
+
+// We can pack multiple statements into one block:
+{
+  print "One statement.";
+  print "Two statements.";
+}

@@ -1,0 +1,37 @@
+﻿// These are all binary infix operators.
+add + me;
+subtract - me;
+multiply * me;
+divide / me;
+
+// The unary minus is an infix and prefix operator!
+-negateMe;
+
+// Comparison && Equality
+less < than;
+lessThan <= orEqual;
+greater > than;
+greaterThan >= orEqual;
+
+1 == 2;         // false.
+"cat" != "dog"; // true.
+
+// Values of different types are never equal!
+314 == "pi"; // false.
+123 == "123"; // false.
+
+// Logical Operators
+!true;  // false.
+!false; // true.
+
+true and false; // false.
+true and true;  // true.
+
+false or false; // false.
+true or false;  // true.
+
+// Precedence
+// We can use parens, as expected.
+var average = (min + max) / 2;
+
+// Otherwise, precedence rules follow from C.
