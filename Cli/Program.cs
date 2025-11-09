@@ -1,4 +1,6 @@
-﻿namespace Cli;
+﻿using Lox.Errors;
+
+namespace Cli;
 
 /// <summary>
 ///   Command-line entrypoint for the cslox interpreter.
@@ -65,5 +67,12 @@ static class Cli
     static void Run(string code)
     {
         var result = Lox.Interpreter.Run(code);
+
+        if (result is LoxLineError lineError)
+        {
+            Console.Error.WriteLine($"[line ${lineError.LineNumber}] Error: ${lineError.Message}");
+        }
+        
+        
     }
 }
