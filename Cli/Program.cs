@@ -66,13 +66,14 @@ static class Cli
     /// </summary>
     static void Run(string code)
     {
-        var result = Lox.Interpreter.Run(code);
+        var result = Lox.Lexer.GetTokens(code);
 
-        if (result is LineError lineError)
+        foreach (var lineError in result.Item2)
         {
             Console.Error.WriteLine($"[line ${lineError.LineNumber}] Error: ${lineError.Message}");
         }
-        
+
+        Console.WriteLine(String.Join(", ", result.Item1));
         
     }
 }

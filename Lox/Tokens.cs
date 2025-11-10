@@ -7,7 +7,7 @@
 /// <param name="lexeme">Lexeme, or raw text of this token</param>
 /// <param name="literal">The literal value of this token</param>
 /// <param name="line">The line number of this token</param>
-readonly struct Token(TokenType type, string lexeme, object? literal, int line)
+public readonly struct Token(TokenType type, string lexeme, object? literal, int line)
 {
     /// <summary>
     ///   Gets the type of this token.
@@ -32,14 +32,14 @@ readonly struct Token(TokenType type, string lexeme, object? literal, int line)
     /// <inheritdoc />
     public override string ToString() {
         
-        return Type + " " + Lexeme + " " + Literal;
+        return Type + " " + Lexeme + "{" + Literal + "}";
     }
 }
 
 /// <summary>
 ///   Represents a token's type.
 /// </summary>
-enum TokenType {
+public enum TokenType {
     // Single-character tokens.
     LeftParen, RightParen, LeftBrace, RightBrace,
     Comma, Dot, Minus, Plus, Semicolon, Slash, Star,

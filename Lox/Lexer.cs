@@ -42,7 +42,7 @@ public static class Lexer
     ///   A tuple of Token and LexErrors, including all properly parsed tokens,
     ///   and a list of any errors.
     /// </returns>
-    static (List<Token>, List<LexError>) GetTokens(string code)
+    public static (List<Token>, List<LexError>) GetTokens(string code)
     {
         List<Token> tokens = [];
         List<LexError> errors = [];
@@ -120,7 +120,7 @@ public static class Lexer
             }
             
             AddTokenLiteral(TokenType.Number, Double.Parse(
-                code.Substring(start, current)
+                code.Substring(start, current - start)
                 ));
         }
 
@@ -140,12 +140,13 @@ public static class Lexer
             if (IsAtEnd())
             {
                 errors.Add(new LexError("Unterminated string.", line));
+                return;
             }
 
             // Handles the closing '"'
             current++;
 
-            string value = code.Substring(start + 1, current - 1);
+            string value = code.Substring(start + 1, current - start - 2);
             AddTokenLiteral(TokenType.String, value);
         }
 
@@ -177,14 +178,14 @@ public static class Lexer
                 current++;
             }
 
-            string lexeme = code.Substring(start, current);
+            string lexeme = code.Substring(start, current - start);
             TokenType type = Keywords.GetValueOrDefault(lexeme, TokenType.Identifier);
             AddToken(type);
         }
         
         void AddTokenLiteral(TokenType type, object? literal)
         {
-            string lexeme = code.Substring(start, current);
+            string lexeme = code.Substring(start, current - start);
             tokens.Add(new Token(type, lexeme, literal, line));
         }
 
