@@ -37,8 +37,11 @@ public static class Lexer
     /// <summary>
     ///   Gets tokens from given code
     /// </summary>
-    /// <param name="code"></param>
-    /// <returns></returns>
+    /// <param name="code">Code</param>
+    /// <returns>
+    ///   A tuple of Token and LexErrors, including all properly parsed tokens,
+    ///   and a list of any errors.
+    /// </returns>
     static (List<Token>, List<LexError>) GetTokens(string code)
     {
         List<Token> tokens = [];
@@ -144,6 +147,27 @@ public static class Lexer
 
             string value = code.Substring(start + 1, current - 1);
             AddTokenLiteral(TokenType.String, value);
+        }
+
+        void AddBlockComment()
+        {
+            while (Peek() != '*' && PeekNext() != '/' && !IsAtEnd())
+            {
+                if (Peek() == '\n')
+                {
+                    line++;
+                }
+                
+                current++;
+            }
+            
+            if (IsAtEnd())
+            {
+                errors.Add(new LexError("Unterminated block comment.", line));
+            }
+
+            // Account for last */
+            current += 2;
         }
 
         void AddIdentifier()
