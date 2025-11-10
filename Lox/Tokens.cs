@@ -7,7 +7,7 @@
 /// <param name="lexeme">Lexeme, or raw text of this token</param>
 /// <param name="literal">The literal value of this token</param>
 /// <param name="line">The line number of this token</param>
-readonly struct Token(TokenType type, string lexeme, object literal, int line)
+readonly struct Token(TokenType type, string lexeme, object? literal, int line)
 {
     /// <summary>
     ///   Gets the type of this token.
@@ -22,7 +22,7 @@ readonly struct Token(TokenType type, string lexeme, object literal, int line)
     /// <summary>
     ///   Gets the literal value of this token.
     /// </summary>
-    private object Literal { get; init; } = literal;
+    private object? Literal { get; init; } = literal;
 
     /// <summary>
     ///   Gets the line this token is on.

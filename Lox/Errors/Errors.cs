@@ -31,14 +31,14 @@ public class LoxError
 /// <summary>
 ///   An error type that represents an error with a line number associated.
 /// </summary>
-public abstract class LoxLineError : LoxError
+public abstract class LineError : LoxError
 {
     /// <summary>
-    ///   Constructs a new LoxLineError with a message and a line number.
+    ///   Constructs a new LineError with a message and a line number.
     /// </summary>
     /// <param name="message"></param>
     /// <param name="line"></param>
-    protected LoxLineError(string message, int line) : base(message)
+    protected LineError(string message, int line) : base(message)
     {
         LineNumber = line;
     }
@@ -52,14 +52,14 @@ public abstract class LoxLineError : LoxError
 /// <summary>
 ///   An error that represents a failure lexing.
 /// </summary>
-public class LoxLexError(string message, int line) : LoxLineError(message, line);
+public class LexError(string message, int line) : LineError(message, line);
 
 /// <summary>
 ///   An error that represents a failure parsing.
 /// </summary>
-public class LoxParseError(string message, int line) : LoxLineError(message, line);
+public class ParseError(string message, int line) : LineError(message, line);
 
 /// <summary>
 ///   An error that represents a generic internal failure.
 /// </summary>
-public class LoxInternalError : LoxError;
+public class InternalError : LoxError;

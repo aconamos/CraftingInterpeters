@@ -68,7 +68,7 @@ static class Cli
     {
         var result = Lox.Interpreter.Run(code);
 
-        if (result is LoxLineError lineError)
+        if (result is LineError lineError)
         {
             Console.Error.WriteLine($"[line ${lineError.LineNumber}] Error: ${lineError.Message}");
         }
