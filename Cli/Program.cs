@@ -1,6 +1,4 @@
-﻿using Lox.Errors;
-
-namespace Cli;
+﻿namespace Cli;
 
 /// <summary>
 ///   Command-line entrypoint for the cslox interpreter.
@@ -39,7 +37,7 @@ static class Cli
     {
         string source = File.ReadAllText(filename);
         
-        Lox.Interpreter.Run(source);
+        Run(source);
     }
 
     /// <summary>

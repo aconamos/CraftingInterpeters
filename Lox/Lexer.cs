@@ -225,12 +225,15 @@ public static class Lexer
                     break; 
                 
                 case '/':
-                    if (MatchAhead('/')) {
+                    if (MatchAhead('/'))
+                    {
                         // A comment goes until the end of the line.
                         while (Peek() != '\n' && !IsAtEnd())
                         {
                             current++;
                         }
+                    } else if (MatchAhead('*')) {
+                        AddBlockComment();
                     } else {
                         AddToken(TokenType.Slash);
                     }
