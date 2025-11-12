@@ -10,18 +10,8 @@ static class Cli
 {
     static void Main(string[] args)
     {
-        // if (args.Length > 1)
-        // {
-        //     PrintUsageMessage();
-        //     Environment.Exit(64);
-        // } else if (args.Length == 1)
-        // {
-        //     RunFile(args[0]);
-        // }
-        // else
-        // {
-        //     RunPrompt();
-        // }
+        Console.WriteLine(
+        AstGenerator.GenerateAstTypes());
     }
 
     /// <summary>
@@ -47,6 +37,26 @@ static class Cli
 
         Console.WriteLine(new AstPrinter().Print(expression));
     }
+
+    /// <summary>
+    ///   CLI entrypoint
+    /// </summary>
+    /// <param name="args">array of arguments</param>
+    static void RunLoop(string[] args) 
+    {
+        if (args.Length > 1)
+        {
+            PrintUsageMessage();
+            Environment.Exit(64);
+        } else if (args.Length == 1)
+        {
+            RunFile(args[0]);
+        }
+        else
+        {
+            RunPrompt();
+        }
+    }    
 
     /// <summary>
     ///   Takes a given filename, reads it, and runs it.

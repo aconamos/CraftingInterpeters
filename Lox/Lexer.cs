@@ -10,29 +10,25 @@ public static class Lexer
     /// <summary>
     ///   A map of strings to keyword tokens.
     /// </summary>
-    private static readonly Dictionary<string, TokenType> Keywords = new();
-
-    /// <summary>
-    ///   Initializes the Keywords map.
-    /// </summary>
-    static Lexer() {
-        Keywords.Add("and",    TokenType.And);
-        Keywords.Add("class",  TokenType.Class);
-        Keywords.Add("else",   TokenType.Else);
-        Keywords.Add("false",  TokenType.False);
-        Keywords.Add("for",    TokenType.For);
-        Keywords.Add("fun",    TokenType.Fun);
-        Keywords.Add("if",     TokenType.If);
-        Keywords.Add("nil",    TokenType.Nil);
-        Keywords.Add("or",     TokenType.Or);
-        Keywords.Add("print",  TokenType.Print);
-        Keywords.Add("return", TokenType.Return);
-        Keywords.Add("super",  TokenType.Super);
-        Keywords.Add("this",   TokenType.This);
-        Keywords.Add("true",   TokenType.True);
-        Keywords.Add("var",    TokenType.Var);
-        Keywords.Add("while",  TokenType.While);
-    }
+    private static readonly Dictionary<string, TokenType> Keywords = new()
+    {
+        ["and"]     = TokenType.And,
+        ["class"]   = TokenType.Class,
+        ["else"]    = TokenType.Else,
+        ["false"]   = TokenType.False,
+        ["for"]     = TokenType.For,
+        ["fun"]     = TokenType.Fun,
+        ["if"]      = TokenType.If,
+        ["nil"]     = TokenType.Nil,
+        ["or"]      = TokenType.Or,
+        ["print"]   = TokenType.Print,
+        ["return"]  = TokenType.Return,
+        ["super"]   = TokenType.Super,
+        ["this"]    = TokenType.This,
+        ["true"]    = TokenType.True,
+        ["var"]     = TokenType.Var,
+        ["while"]   = TokenType.While,
+    };
     
     /// <summary>
     ///   Gets tokens from given code
