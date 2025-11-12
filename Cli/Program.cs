@@ -1,4 +1,7 @@
-﻿namespace Cli;
+﻿using Lox;
+using Lox.Tools;
+
+namespace Cli;
 
 /// <summary>
 ///   Command-line entrypoint for the cslox interpreter.
@@ -7,18 +10,18 @@ static class Cli
 {
     static void Main(string[] args)
     {
-        if (args.Length > 1)
-        {
-            PrintUsageMessage();
-            Environment.Exit(64);
-        } else if (args.Length == 1)
-        {
-            RunFile(args[0]);
-        }
-        else
-        {
-            RunPrompt();
-        }
+        // if (args.Length > 1)
+        // {
+        //     PrintUsageMessage();
+        //     Environment.Exit(64);
+        // } else if (args.Length == 1)
+        // {
+        //     RunFile(args[0]);
+        // }
+        // else
+        // {
+        //     RunPrompt();
+        // }
     }
 
     /// <summary>
@@ -27,6 +30,22 @@ static class Cli
     static void PrintUsageMessage()
     {
         Console.WriteLine("Usage: cslox [script]");
+    }
+
+    /// <summary>
+    ///   Print an example expression using ASTPrinter
+    /// </summary>
+    static void PrintExampleExpression()
+    {
+        Expr expression = new Expr.Binary(
+            new Expr.Unary(
+                new Token(TokenType.Minus, "-", null, 1),
+                new Expr.Literal(123)),
+            new Token(TokenType.Star, "*", null, 1),
+            new Expr.Grouping(
+                new Expr.Literal(45.67)));
+
+        Console.WriteLine(new AstPrinter().Print(expression));
     }
 
     /// <summary>

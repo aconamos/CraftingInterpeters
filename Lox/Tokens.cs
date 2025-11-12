@@ -12,22 +12,22 @@ public readonly struct Token(TokenType type, string lexeme, object? literal, int
     /// <summary>
     ///   Gets the type of this token.
     /// </summary>
-    TokenType Type { get; init; } = type;
+    public TokenType Type { get; init; } = type;
 
     /// <summary>
     ///   Gets the lexeme of this token.
     /// </summary>
-    string Lexeme { get; init; } = lexeme;
+    public string Lexeme { get; init; } = lexeme;
 
     /// <summary>
     ///   Gets the literal value of this token.
     /// </summary>
-    private object? Literal { get; init; } = literal;
+    public object? Literal { get; init; } = literal;
 
     /// <summary>
     ///   Gets the line this token is on.
     /// </summary>
-    private int Line { get; init; } = line;
+    public int Line { get; init; } = line;
 
     /// <inheritdoc />
     public override string ToString() {
