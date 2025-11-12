@@ -10,8 +10,8 @@ static class Cli
 {
     static void Main(string[] args)
     {
-        Console.WriteLine(
-        AstGenerator.GenerateAstTypes());
+        PrintExampleAstExpression();
+        PrintExampleRstExpression();
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ static class Cli
     /// <summary>
     ///   Print an example expression using ASTPrinter
     /// </summary>
-    static void PrintExampleExpression()
+    static void PrintExampleAstExpression()
     {
         Expr expression = new Expr.Binary(
             new Expr.Unary(
@@ -36,6 +36,28 @@ static class Cli
                 new Expr.Literal(45.67)));
 
         Console.WriteLine(new AstPrinter().Print(expression));
+    }
+
+    static void PrintExampleRstExpression()
+    {
+        Expr expression = new Expr.Binary(
+            new Expr.Grouping(
+                new Expr.Binary(
+                    new Expr.Literal(1), 
+                    new Token(TokenType.Plus, "+", null, 1), 
+                    new Expr.Literal(2))
+            ),
+            new Token(TokenType.Star, "*", null, 1),
+            new Expr.Grouping(
+                new Expr.Binary(
+                    new Expr.Literal(4),
+                    new Token(TokenType.Minus, "-", null, 1),
+                    new Expr.Literal(3)
+                )
+            )
+        );
+        
+        Console.WriteLine(new RpnPrinter().Print(expression));
     }
 
     /// <summary>

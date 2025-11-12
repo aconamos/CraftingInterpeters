@@ -17,3 +17,10 @@ par1 -> expr par2
 par2 -> ""
 par2 -> "," expr
 par2 -> par2 par2
+
+
+bonus: what kind of expression does this bit of grammar encode?
+     - general expression (?)
+        including:
+        - operations on an object (calling as a function, or dot operator to access members)
+     - rvalue?
