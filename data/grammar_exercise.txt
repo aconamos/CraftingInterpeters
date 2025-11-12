@@ -1,0 +1,19 @@
+﻿expr → expr ( "(" ( expr ( "," expr )* )? ")" | "." IDENTIFIER )+
+     | IDENTIFIER
+     | NUMBER
+
+=================================================================
+
+expr -> expr par
+expr -> IDENTIFIER
+expr -> NUMBER
+
+par  -> "(" par1 ")" 
+par  -> "." IDENTIFIER 
+
+par1 -> ""
+par1 -> expr par2
+
+par2 -> ""
+par2 -> "," expr
+par2 -> par2 par2
