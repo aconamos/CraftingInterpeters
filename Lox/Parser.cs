@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Lox.Errors;
+﻿using Lox.Errors;
 
 namespace Lox;
 

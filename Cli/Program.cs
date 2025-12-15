@@ -10,8 +10,9 @@ static class Cli
 {
     static void Main(string[] args)
     {
-        PrintExampleAstExpression();
-        PrintExampleRpnExpression();
+        // PrintExampleAstExpression();
+        // PrintExampleRpnExpression();
+        RunLoop(args);
     }
 
     /// <summary>
@@ -119,13 +120,24 @@ static class Cli
     static void Run(string code)
     {
         var result = Lox.Lexer.GetTokens(code);
-
+        
         foreach (var lineError in result.Item2)
         {
             Console.Error.WriteLine($"[line ${lineError.LineNumber}] Error: ${lineError.Message}");
         }
 
-        Console.WriteLine(String.Join(", ", result.Item1));
+        var tokens = result.Item1;
         
+        Console.WriteLine(string.Join("\n", tokens));
+
+        var expression = Parser.ParseTokens(tokens);
+
+        if (expression is null)
+        {
+            Console.Error.WriteLine("Error parsing!");
+            return;
+        }
+
+        new RpnPrinter().Print(expression);
     }
 }

@@ -271,6 +271,8 @@ public static class Lexer
             start = current;
         }
 
+        tokens.Add(new Token(TokenType.Eof, "", null, line));
+
         return (tokens, errors);
     }
 }
