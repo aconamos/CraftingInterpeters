@@ -14,9 +14,10 @@ binary         → expression operator expression ;
 operator       → "==" | "!=" | "<" | "<=" | ">" | ">="
                | "+"  | "-"  | "*" | "/" ;
                
-^^^^ ambiguous
+// ^^^^ ambiguous
 
-vvvv not ambiguous 
+// vvvv not ambiguous 
+// This grammar includes a precedence ordering. The rule at the top has the lowest precedence.
 
 expression     → equality ;
 equality       → comparison ( ( "!=" | "==" ) comparison )* ;
@@ -27,3 +28,22 @@ unary          → ( "!" | "-" ) unary
                | primary ;
 primary        → NUMBER | STRING | "true" | "false" | "nil"
                | "(" expression ")" ;
+               
+// Augmented grammar with Ternary and Comma
+
+expression     → ternary ;
+ternary        → equality ? equality : equality ;
+equality       → comparison ( ( "!=" | "==" ) comparison )* ;
+comparison     → term ( ( ">" | ">=" | "<" | "<=" ) term )* ;
+term           → factor ( ( "-" | "+" ) factor )* ;
+factor         → unary ( ( "/" | "*" ) unary )* ;
+unary          → ( "!" | "-" ) unary
+               | primary ;
+primary        → NUMBER | STRING | "true" | "false" | "nil"
+               | "(" expression ")" ;
+
+primary ?  expression :  expression;
+primary ? !expression : !expression;
+primary ?  expression :  expression;
+primary ?  expression :  expression;
+primary ?  expression :  expression;

@@ -138,6 +138,7 @@ static class Cli
             return;
         }
 
-        new RpnPrinter().Print(expression);
+        Console.WriteLine(expression);
+        Console.WriteLine(new RpnPrinter().Print(expression));
     }
 }

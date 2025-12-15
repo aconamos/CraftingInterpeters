@@ -104,15 +104,6 @@ public class Parser
     private Token Previous => _tokens[_current - 1];
 
     /// <summary>
-    ///   Matches an expression
-    /// </summary>
-    /// <returns>The expression</returns>
-    private Expr Expression()
-    {
-        return Equality();
-    }
-
-    /// <summary>
     ///   Reports an error
     /// </summary>
     /// <param name="lineNumber">Line number of the error</param>
@@ -121,7 +112,7 @@ public class Parser
     private static void Report(int lineNumber, string location, string message)
     {
         Console.Error.WriteLine(
-            $"Line {lineNumber}: At {location}: {message}"
+            $"Line {lineNumber}: {location}: {message}"
             );
     }
     
@@ -197,6 +188,35 @@ public class Parser
     //
 
     /// <summary>
+    ///   Matches an expression
+    /// </summary>
+    /// <returns>The expression</returns>
+    private Expr Expression()
+    {
+        return Ternary();
+    }
+
+    /// <summary>
+    ///   Matches a ternary
+    /// </summary>
+    /// <returns>The expression</returns>
+    private Expr Ternary()
+    {
+        Expr condition = Equality();
+
+        if (Match(TokenType.Question))
+        {
+            Expr trueExpr = Equality();
+            Consume(TokenType.Colon, "Expect ':' after ternary");
+            Expr falseExpr = Equality();
+            
+            return new Expr.Ternary(condition, trueExpr, falseExpr);
+        }
+
+        return condition;
+    }
+
+    /// <summary>
     ///   Executes a common operation of matching a given rule, then matching given types, and returning a binary expression
     /// </summary>
     /// <param name="operandMethod">Method to match the rule</param>
@@ -236,7 +256,8 @@ public class Parser
         Term,
         TokenType.Greater,
         TokenType.GreaterEqual,
-        TokenType.Less
+        TokenType.Less,
+        TokenType.LessEqual
     );
 
     /// <summary>
@@ -358,6 +379,20 @@ public abstract record Expr
     }
 
     /// <summary>
+    ///   Unary expression
+    /// </summary>
+    /// <param name="Conditional">The condition of the ternary</param>
+    /// <param name="TrueExpr">The value if the condition is true</param>
+    /// <param name="FalseExpr">The value if the condition is false</param>
+    public record Ternary(Expr Conditional, Expr TrueExpr, Expr FalseExpr) : Expr
+    {
+        public override T Accept<T>(IVisitor<T> visitor)
+        {
+            return visitor.VisitTernaryExpr(this);
+        }
+    }
+
+    /// <summary>
     ///   Accept a visitor; that is, dispatch to the correct method on the visitor
     /// </summary>
     /// <param name="visitor">Visitor object</param>
@@ -375,5 +410,6 @@ public abstract record Expr
         T VisitGroupingExpr(Grouping expr);
         T VisitLiteralExpr(Literal expr);
         T VisitUnaryExpr(Unary expr);
+        T VisitTernaryExpr(Ternary expr);
     }
 }

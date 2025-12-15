@@ -46,6 +46,12 @@ public class AstPrinter : Expr.IVisitor<string>
         return Parenthesize(expr.Op.Lexeme, expr.Right);
     }
 
+    /// <inheritdoc />
+    public string VisitTernaryExpr(Expr.Ternary expr)
+    {
+        return Parenthesize("ternary", expr.Conditional, expr.TrueExpr, expr.FalseExpr);
+    }
+
     /// <summary>
     ///   Wrap a bunch of expressions in parentheses
     /// </summary>

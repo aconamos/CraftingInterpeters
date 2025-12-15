@@ -205,7 +205,9 @@ public static class Lexer
                 case '-': AddToken(TokenType.Minus); break;
                 case '+': AddToken(TokenType.Plus); break;
                 case ';': AddToken(TokenType.Semicolon); break;
-                case '*': AddToken(TokenType.Star); break; 
+                case '*': AddToken(TokenType.Star); break;
+                case '?': AddToken(TokenType.Question); break;
+                case ':': AddToken(TokenType.Colon); break;
                 
                 case '!':
                     AddToken(MatchAhead('=') ? TokenType.BangEqual : TokenType.Bang);

@@ -34,7 +34,12 @@ public class RpnPrinter : Expr.IVisitor<string>
             return "nil";
         }
         
-        return expr.Value.ToString() ?? throw new NullReferenceException("Expression value ToString is null!");
+        return expr.Value?.ToString() ?? throw new NullReferenceException("Expression value ToString is null!");
+    }
+
+    public string VisitTernaryExpr(Expr.Ternary expr)
+    {
+        return $"{expr.Conditional.Accept(this)} {expr.TrueExpr.Accept(this)} {expr.FalseExpr.Accept(this)} ?:";
     }
 
     /// <inheritdoc />
