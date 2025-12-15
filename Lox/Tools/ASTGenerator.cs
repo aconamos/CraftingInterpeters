@@ -30,7 +30,6 @@ public static class AstGenerator
         StringBuilder builder = new StringBuilder();
         builder.AppendLine("public abstract record Expr");
         builder.AppendLine("{");
-        // builder.WriteRecord("Binary", ["Expr Left", "Token Op", "Expr Right"]);
         foreach (var record in records)
         {
             builder.WriteRecord(record.Item1, record.Item2);

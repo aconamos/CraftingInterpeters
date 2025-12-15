@@ -11,7 +11,7 @@ static class Cli
     static void Main(string[] args)
     {
         PrintExampleAstExpression();
-        PrintExampleRstExpression();
+        PrintExampleRpnExpression();
     }
 
     /// <summary>
@@ -38,7 +38,10 @@ static class Cli
         Console.WriteLine(new AstPrinter().Print(expression));
     }
 
-    static void PrintExampleRstExpression()
+    /// <summary>
+    ///   Print an example expression using RPNPrinter
+    /// </summary>
+    static void PrintExampleRpnExpression()
     {
         Expr expression = new Expr.Binary(
             new Expr.Grouping(

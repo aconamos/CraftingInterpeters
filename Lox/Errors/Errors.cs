@@ -3,7 +3,7 @@
 /// <summary>
 ///   Represents a generic Lox error.
 /// </summary>
-public class LoxError
+public class LoxError : Exception
 {
     /// <summary>
     ///   Constructs a new LoxError with the given message.
