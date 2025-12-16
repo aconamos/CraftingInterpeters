@@ -42,3 +42,17 @@ unary          → ( "!" | "-" ) unary
                | primary ;
 primary        → NUMBER | STRING | "true" | "false" | "nil"
                | "(" expression ")" ;
+               
+// Augmented grammar with Ternary, Comma, and error productions for binary ops
+
+expression     → comma ;
+comma          → ternary? ( "," comma )? ;
+ternary        → equality ( "?" ternary ":" ternary )? ;
+equality       → comparison? ( ( "!=" | "==" ) comparison )* ;
+comparison     → term? ( ( ">" | ">=" | "<" | "<=" ) term )* ;
+term           → factor? ( ( "-" | "+" ) factor )* ;
+factor         → unary? ( ( "/" | "*" ) unary )* ;
+unary          → ( "!" | "-" ) unary
+               | primary ;
+primary        → NUMBER | STRING | "true" | "false" | "nil"
+               | "(" expression ")" ;

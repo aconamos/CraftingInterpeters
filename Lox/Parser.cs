@@ -202,6 +202,11 @@ public class Parser
     /// <returns>The expression</returns>
     private Expr Comma()
     {
+        if (Match(TokenType.Comma))
+        {
+            Report(Previous.Line, ",", "Comma operator appeared without left-hand expression");
+        }
+        
         Expr left = Ternary();
 
         if (Match(TokenType.Comma))
