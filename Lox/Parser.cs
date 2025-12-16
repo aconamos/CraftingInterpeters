@@ -206,9 +206,9 @@ public class Parser
 
         if (Match(TokenType.Question))
         {
-            Expr trueExpr = Equality();
+            Expr trueExpr = Ternary();
             Consume(TokenType.Colon, "Expect ':' after ternary");
-            Expr falseExpr = Equality();
+            Expr falseExpr = Ternary();
             
             return new Expr.Ternary(condition, trueExpr, falseExpr);
         }
