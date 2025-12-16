@@ -31,7 +31,8 @@ primary        → NUMBER | STRING | "true" | "false" | "nil"
                
 // Augmented grammar with Ternary and Comma
 
-expression     → ternary ;
+expression     → comma ;
+comma          → ternary ( "," comma )? ;
 ternary        → equality ( "?" ternary ":" ternary )? ;
 equality       → comparison ( ( "!=" | "==" ) comparison )* ;
 comparison     → term ( ( ">" | ">=" | "<" | "<=" ) term )* ;

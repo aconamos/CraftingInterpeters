@@ -193,7 +193,26 @@ public class Parser
     /// <returns>The expression</returns>
     private Expr Expression()
     {
-        return Ternary();
+        return Comma();
+    }
+
+    /// <summary>
+    ///   Matches a comma
+    /// </summary>
+    /// <returns>The expression</returns>
+    private Expr Comma()
+    {
+        Expr left = Ternary();
+
+        if (Match(TokenType.Comma))
+        {
+            Token op = Previous;
+            Expr right = Comma();
+
+            return new Expr.Binary(left, op, right);
+        }
+
+        return left;
     }
 
     /// <summary>
