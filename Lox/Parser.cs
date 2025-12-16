@@ -251,6 +251,11 @@ public class Parser
         params TokenType[] matchTypes
     )
     {
+        if (Match(matchTypes))
+        {
+            Report(Previous.Line, Previous.Lexeme, "Binary operator appeared without left-hand expression");
+        }
+        
         Expr expr = operandMethod();
 
         while (Match(matchTypes))
